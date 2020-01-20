@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "314848655309",
+    "firebase_url": "https://music-review-2b0dc.firebaseio.com",
+    "project_id": "music-review-2b0dc",
+    "storage_bucket": "music-review-2b0dc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:314848655309:android:4f0f6ca045caca9ea6f684",
+        "android_client_info": {
+          "package_name": "com.musicreview.fernando"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "314848655309-81iqbdpso34a2qo8qp1b7um2fob1s56r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.musicreview.fernando",
+            "certificate_hash": "b51fcd777c12fbed5c9e17ee3b95b6d09b3a2d8b"
+          }
+        },
+        {
+          "client_id": "314848655309-oqn5nrm6vc65ia52dadvru80k0hj1jmt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4m2esMnkKkwKXCgW28-WZHnWa3sM4qqs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "314848655309-oqn5nrm6vc65ia52dadvru80k0hj1jmt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
