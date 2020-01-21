@@ -1,4 +1,5 @@
 import 'package:k_central_app/models/Tag.dart';
+import 'package:k_central_app/store/tag/tag_controller.dart';
 import 'package:mobx/mobx.dart';
 import 'package:dio/dio.dart';
 import 'package:hive/hive.dart';
@@ -11,6 +12,7 @@ class User = _User with _$User;
 
 abstract class _User with Store {
   var dio = Dio();
+  final tagController = TagController();
   final userBox = Hive.box('user');
   // final darkModeBox = Hive.box('darkModeBox');
 
@@ -31,7 +33,10 @@ abstract class _User with Store {
   
   
 
-  
+  @action
+  void setUserFavoriteTags(lista) {
+    print(lista);
+  }
 
   @action
   void setExpandedKey(GlobalKey key) {
@@ -43,7 +48,10 @@ abstract class _User with Store {
     counter++;
   }
 
-  
+  @action
+  void finishStart() {
+    userBox.put('isLogged', true);
+  }
 
   @action
   void setDisplayName(val) {

@@ -9,13 +9,6 @@ part of 'feed.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$Feed on _Feed, Store {
-  Computed<int> _$getCurrentFeedGenreIdComputed;
-
-  @override
-  int get getCurrentFeedGenreId => (_$getCurrentFeedGenreIdComputed ??=
-          Computed<int>(() => super.getCurrentFeedGenreId))
-      .value;
-
   final _$counterAtom = Atom(name: '_Feed.counter');
 
   @override
@@ -33,53 +26,48 @@ mixin _$Feed on _Feed, Store {
     }, _$counterAtom, name: '${_$counterAtom.name}_set');
   }
 
-  final _$feedGenresAtom = Atom(name: '_Feed.feedGenres');
+  final _$feedTagsAtom = Atom(name: '_Feed.feedTags');
 
   @override
-  ObservableList<FeedGenre> get feedGenres {
-    _$feedGenresAtom.context.enforceReadPolicy(_$feedGenresAtom);
-    _$feedGenresAtom.reportObserved();
-    return super.feedGenres;
+  ObservableList<Tag> get feedTags {
+    _$feedTagsAtom.context.enforceReadPolicy(_$feedTagsAtom);
+    _$feedTagsAtom.reportObserved();
+    return super.feedTags;
   }
 
   @override
-  set feedGenres(ObservableList<FeedGenre> value) {
-    _$feedGenresAtom.context.conditionallyRunInAction(() {
-      super.feedGenres = value;
-      _$feedGenresAtom.reportChanged();
-    }, _$feedGenresAtom, name: '${_$feedGenresAtom.name}_set');
+  set feedTags(ObservableList<Tag> value) {
+    _$feedTagsAtom.context.conditionallyRunInAction(() {
+      super.feedTags = value;
+      _$feedTagsAtom.reportChanged();
+    }, _$feedTagsAtom, name: '${_$feedTagsAtom.name}_set');
   }
 
-  final _$_currentFeedGenreIdAtom = Atom(name: '_Feed._currentFeedGenreId');
+  final _$currentTagAtom = Atom(name: '_Feed.currentTag');
 
   @override
-  int get _currentFeedGenreId {
-    _$_currentFeedGenreIdAtom.context
-        .enforceReadPolicy(_$_currentFeedGenreIdAtom);
-    _$_currentFeedGenreIdAtom.reportObserved();
-    return super._currentFeedGenreId;
+  int get currentTag {
+    _$currentTagAtom.context.enforceReadPolicy(_$currentTagAtom);
+    _$currentTagAtom.reportObserved();
+    return super.currentTag;
   }
 
   @override
-  set _currentFeedGenreId(int value) {
-    _$_currentFeedGenreIdAtom.context.conditionallyRunInAction(() {
-      super._currentFeedGenreId = value;
-      _$_currentFeedGenreIdAtom.reportChanged();
-    }, _$_currentFeedGenreIdAtom,
-        name: '${_$_currentFeedGenreIdAtom.name}_set');
+  set currentTag(int value) {
+    _$currentTagAtom.context.conditionallyRunInAction(() {
+      super.currentTag = value;
+      _$currentTagAtom.reportChanged();
+    }, _$currentTagAtom, name: '${_$currentTagAtom.name}_set');
+  }
+
+  final _$getUserTagsAsyncAction = AsyncAction('getUserTags');
+
+  @override
+  Future getUserTags() {
+    return _$getUserTagsAsyncAction.run(() => super.getUserTags());
   }
 
   final _$_FeedActionController = ActionController(name: '_Feed');
-
-  @override
-  void initFeedGenres() {
-    final _$actionInfo = _$_FeedActionController.startAction();
-    try {
-      return super.initFeedGenres();
-    } finally {
-      _$_FeedActionController.endAction(_$actionInfo);
-    }
-  }
 
   @override
   void increment() {
@@ -92,10 +80,10 @@ mixin _$Feed on _Feed, Store {
   }
 
   @override
-  void setCurrentFeedGenreId(int id) {
+  void setCurrentTag(int tagId) {
     final _$actionInfo = _$_FeedActionController.startAction();
     try {
-      return super.setCurrentFeedGenreId(id);
+      return super.setCurrentTag(tagId);
     } finally {
       _$_FeedActionController.endAction(_$actionInfo);
     }

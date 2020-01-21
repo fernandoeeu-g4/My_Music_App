@@ -75,18 +75,20 @@ abstract class _SigninController with Store {
     print('begin sign method');
     try {
       bool isL = await _googleSignIn.isSignedIn();
-      if (!isL) {
-        final res = await _googleSignIn.signIn();
-        Response response = await userService.getUserData(res);
-        UserData user = UserData(
-          email: response.data['user']['email'],
-          username: response.data['user']['username'],
-          googleId: response.data['user']['google_id'],
-          token: response.data['token'],
-        );
-        bool result = _saveUserData(user);
-        return result;
+      if (isL) {
+        await doLogout();
       }
+
+      final res = await _googleSignIn.signIn();
+      Response response = await userService.getUserData(res);
+      UserData user = UserData(
+        email: response.data['user']['email'],
+        username: response.data['user']['username'],
+        googleId: response.data['user']['google_id'],
+        token: response.data['token'],
+      );
+      bool result = _saveUserData(user);
+      return result;
     } catch (error) {
       print(error);
     }

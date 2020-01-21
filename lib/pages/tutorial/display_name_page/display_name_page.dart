@@ -2,6 +2,7 @@ import 'package:after_init/after_init.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:k_central_app/pages/app/app.dart';
 import 'package:k_central_app/pages/feed_page.dart';
 import 'package:k_central_app/pages/tutorial/display_name_page/widgets/custom_back_button.dart';
 import 'package:k_central_app/pages/tutorial/display_name_page/widgets/custom_continue_button.dart';
@@ -18,7 +19,8 @@ class DisplayNamePage extends StatefulWidget {
   _DisplayNamePageState createState() => _DisplayNamePageState();
 }
 
-class _DisplayNamePageState extends State<DisplayNamePage> with AfterInitMixin<DisplayNamePage> {
+class _DisplayNamePageState extends State<DisplayNamePage>
+    with AfterInitMixin<DisplayNamePage> {
   final TextEditingController _displayNameController = TextEditingController();
 
   @override
@@ -27,9 +29,9 @@ class _DisplayNamePageState extends State<DisplayNamePage> with AfterInitMixin<D
     userState.setDisplayName('');
   }
 
-
   @override
   Widget build(BuildContext context) {
+    final userBox = Hive.box('user');
     final userState = Provider.of<User>(context);
     final double _screenWidth = MediaQuery.of(context).size.width;
     final double _screenHeight = MediaQuery.of(context).size.height;
@@ -78,12 +80,11 @@ class _DisplayNamePageState extends State<DisplayNamePage> with AfterInitMixin<D
                               child: MiniBannerText(
                                 miniBannerMargin: EdgeInsets.only(top: 1),
                                 screenWidth: _screenWidth,
-                                bannerText: userState.displayName,
+                                bannerText: 'Como gostaria de ser chamado(a)?',
                                 textSize: 40,
                                 widthRatio: 1.2,
                               ),
                             ),
-                           
                             DisplayNameInput(
                               controller: _displayNameController,
                               onChanged: (value) {
@@ -98,19 +99,21 @@ class _DisplayNamePageState extends State<DisplayNamePage> with AfterInitMixin<D
                           children: <Widget>[
                             CustomBackButton(),
                             CustomContinueButton(
-                                isDark: true,
-                                onTap: userState.displayName.length == 0
-                                    ? () {
-                                        print(userState.displayName);
-                                      }
-                                    : () {
-                                        Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                            builder: (context) => UserTag(),
-                                          ),
-                                        );
-                                      },
-                                screenWidth: _screenWidth),
+                              isDark: true,
+                              onTap: userState.displayName.length == 0
+                                  ? () {
+                                      print(userState.displayName);
+                                    }
+                                  : () {
+                                      userBox.put('isLogged', true);
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder: (context) => App(),
+                                        ),
+                                      );
+                                    },
+                              screenWidth: _screenWidth,
+                            ),
                           ],
                         ),
                       ],

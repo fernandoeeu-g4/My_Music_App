@@ -54,10 +54,13 @@ class _AppState extends State<App> with SingleTickerProviderStateMixin {
           builder: (context, box, widget) {
             // TODO verificar pq o hasCompleted está vindo null!
             return box.get(
-                        'isLogged') /*&& box.get('hasCompletedTutorial', defaultValue: false)*/ ==
-                    true
+              'isLogged',
+            ) /*&& box.get('hasCompletedTutorial', defaultValue: false)*/
                 ? BottomNavigationBar(
-                    items: items, currentIndex: currentIndex, onTap: onTap)
+                    items: items,
+                    currentIndex: currentIndex,
+                    onTap: onTap,
+                  )
                 : Container(
                     height: 0,
                   );
@@ -67,12 +70,12 @@ class _AppState extends State<App> with SingleTickerProviderStateMixin {
         //   currentIndex: currentIndex,
         //   bodyList: bodyList,
         // ),
-        body: userBox.get('isLogged') ?
-        AppIndexedStack(
-          bodyList: bodyList,
-          currentIndex: currentIndex,
-        ) :
-        TutorialPage(),
+        body: userBox.get('isLogged')
+            ? AppIndexedStack(
+                bodyList: bodyList,
+                currentIndex: currentIndex,
+              )
+            : TutorialPage(),
       ),
     );
   }

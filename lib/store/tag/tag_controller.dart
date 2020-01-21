@@ -10,6 +10,9 @@ abstract class _TagController with Store {
   final _tagsService = TagsService();
 
   @observable
+  int screenHeight = 0;
+
+  @observable
   int counter = 0;
 
   @observable
@@ -25,12 +28,18 @@ abstract class _TagController with Store {
   ObservableList<Tag> tags = ObservableList<Tag>();
 
   @action
+  void setScreenHeight(int val) {
+    screenHeight = val;
+  }
+
+  @action
   Future getTags() async {
     tags.clear();
     userSelectedTags.clear();
     try {
       var tagsResponse = await _tagsService.getTopTags();
       List aux = tagsResponse.data;
+      getItemsToAddPadding(screenHeight, aux.length);
       aux.forEach((e) => tags.add(Tag(name: e['name'], url: e['url'])));
     } catch (e) {
       print(e);

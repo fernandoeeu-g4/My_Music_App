@@ -1,4 +1,6 @@
+import 'package:k_central_app/models/Tag.dart';
 import 'package:k_central_app/models/feed_genre.dart';
+import 'package:k_central_app/service/feed_service.dart';
 import 'package:mobx/mobx.dart';
 
 part 'feed.g.dart';
@@ -6,29 +8,16 @@ part 'feed.g.dart';
 class Feed = _Feed with _$Feed;
 
 abstract class _Feed with Store {
+  final feedService = FeedService();
+
   @observable
   int counter = 0;
 
   @observable
-  ObservableList<FeedGenre> feedGenres = ObservableList<FeedGenre>();
-
-  @action
-  void initFeedGenres() {
-    feedGenres.add(FeedGenre(title: 'kpop', label: 'k-pop', id: 0));
-    feedGenres.add(FeedGenre(title: 'hip-hop', label: 'hip-hop', id: 1));
-    feedGenres.add(FeedGenre(title: 'pop', label: 'pop', id: 2));
-    feedGenres.add(FeedGenre(title: 'r&b', label: 'r&b', id: 3));
-    feedGenres.add(FeedGenre(title: 'jazz', label: 'jazz', id: 4));
-    feedGenres.add(FeedGenre(title: 'soul', label: 'soul', id: 5));
-  }
-
-  @observable
-  int _currentFeedGenreId = 0;
-
-  @computed
-  int get getCurrentFeedGenreId => _currentFeedGenreId;
+  ObservableList<Tag> feedTags = ObservableList<Tag>();
   
-
+  @observable
+  int currentTag = 0;
   // actions
 
   @action
@@ -37,9 +26,34 @@ abstract class _Feed with Store {
   }
 
   @action
-  void setCurrentFeedGenreId(int id) {
-    _currentFeedGenreId = id;
+  void setCurrentTag(int tagId) {
+    currentTag = tagId;
   }
+
+  @action
+  Future getUserTags() async {
+    var response = await feedService.getUserTags();
+    print(response.data);
+    List aux = response.data;
+    aux.forEach((i) => print(i));
+    feedTags.add(
+      Tag(
+        id: -1,
+        name: 'Descubra',
+        url: null
+      )
+    );
+    aux.forEach((tag) => feedTags.add(
+      Tag(
+        name: tag['name'],
+        url: tag['url'],
+        id: tag['id']
+      )
+    ));
+    print(feedTags.length);
+  }
+
+ 
 
 
 }

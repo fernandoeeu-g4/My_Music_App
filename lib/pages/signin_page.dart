@@ -18,9 +18,9 @@ class _SigninPageState extends State<SigninPage> with AfterInitMixin<SigninPage>
 
   @override
   void didInitState() async {
-    print('teste');
-    final signinState = Provider.of<SigninController>(context);
-    await signinState.doLogout();
+    // print('teste');
+    // final signinState = Provider.of<SigninController>(context);
+    // await signinState.doLogout();
   }
 
   @override

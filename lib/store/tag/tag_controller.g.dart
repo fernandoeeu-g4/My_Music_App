@@ -9,6 +9,23 @@ part of 'tag_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$TagController on _TagController, Store {
+  final _$screenHeightAtom = Atom(name: '_TagController.screenHeight');
+
+  @override
+  int get screenHeight {
+    _$screenHeightAtom.context.enforceReadPolicy(_$screenHeightAtom);
+    _$screenHeightAtom.reportObserved();
+    return super.screenHeight;
+  }
+
+  @override
+  set screenHeight(int value) {
+    _$screenHeightAtom.context.conditionallyRunInAction(() {
+      super.screenHeight = value;
+      _$screenHeightAtom.reportChanged();
+    }, _$screenHeightAtom, name: '${_$screenHeightAtom.name}_set');
+  }
+
   final _$counterAtom = Atom(name: '_TagController.counter');
 
   @override
@@ -106,6 +123,16 @@ mixin _$TagController on _TagController, Store {
 
   final _$_TagControllerActionController =
       ActionController(name: '_TagController');
+
+  @override
+  void setScreenHeight(int val) {
+    final _$actionInfo = _$_TagControllerActionController.startAction();
+    try {
+      return super.setScreenHeight(val);
+    } finally {
+      _$_TagControllerActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   void setTutorialSelectedTags(dynamic index) {

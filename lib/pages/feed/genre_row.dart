@@ -8,25 +8,29 @@ class GenreRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final feedState = Provider.of<Feed>(context);
-    return Row(
-              children: <Widget>[
-                Expanded(
-                  child: Container(
-                    height: 80,
-                    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 0),
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: feedState.feedGenres.length,
-                      itemBuilder: (BuildContext ctx, int index) {
-                        return GenreItem(
-                            label: feedState.feedGenres[index].label,
-                            local: feedState.feedGenres[index].id);
-                        // return Text(feedState.feedGenres[index].label);
-                      },
+    print(feedState.feedTags);
+    return Observer(
+          builder: (_) => Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Container(
+                      height: 80,
+                      padding: EdgeInsets.symmetric(vertical: 20, horizontal: 0),
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: feedState.feedTags.length,
+                        itemBuilder: (BuildContext ctx, int index) {
+                          return GenreItem(
+                              name: feedState.feedTags[index].name,
+                              url: feedState.feedTags[index].url,
+                              id: index,);
+                          // return Text(feedState.feedGenres[index].label);
+                        },
+                      ),
                     ),
                   ),
-                ),
-              ],
-            );
+                ],
+              ),
+    );
   }
 }

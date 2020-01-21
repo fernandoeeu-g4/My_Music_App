@@ -4,12 +4,12 @@ import 'package:k_central_app/store/feed/feed.dart';
 import 'package:provider/provider.dart';
 
 class GenreItem extends StatelessWidget {
-  GenreItem({this.label, this.current, this.local});
+  GenreItem({this.name, this.url, this.id});
 
 
-  final String label;
-  final int current;
-  final int local;
+  final String name;
+  final String url;
+  final int id;
 
   @override
   Widget build(BuildContext context) {
@@ -19,23 +19,23 @@ class GenreItem extends StatelessWidget {
         children: <Widget>[
           // Text(feedState.counter.toString()),
           SizedBox(
-            width: local == 0 ? 15 : 5.0,
+            width: id == 0 ? 15 : 5.0,
           ),
           GestureDetector(
-            onTap: () => feedState.setCurrentFeedGenreId(local),
+            onTap: () => feedState.setCurrentTag(id),
             child: Container(
               height: 60.0,
               decoration: BoxDecoration(
-                color: feedState.getCurrentFeedGenreId == local ? Colors.pinkAccent : Colors.white,
+                color: feedState.currentTag == id ? Colors.pinkAccent : Colors.white,
                 borderRadius: BorderRadius.circular(50.0),
               ),
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 5),
                 child: Center(
                   child: Text(
-                    label,
+                    name,
                     style: TextStyle(
-                        color: feedState.getCurrentFeedGenreId == local ? Colors.white : Colors.black,
+                        color: feedState.currentTag == id ? Colors.white : Colors.black,
                         fontSize: 18,
                         fontWeight: FontWeight.bold),
                   ),

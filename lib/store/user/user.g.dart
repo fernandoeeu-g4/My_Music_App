@@ -106,6 +106,16 @@ mixin _$User on _User, Store {
   final _$_UserActionController = ActionController(name: '_User');
 
   @override
+  void setUserFavoriteTags(dynamic lista) {
+    final _$actionInfo = _$_UserActionController.startAction();
+    try {
+      return super.setUserFavoriteTags(lista);
+    } finally {
+      _$_UserActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void setExpandedKey(GlobalKey<State<StatefulWidget>> key) {
     final _$actionInfo = _$_UserActionController.startAction();
     try {
@@ -120,6 +130,16 @@ mixin _$User on _User, Store {
     final _$actionInfo = _$_UserActionController.startAction();
     try {
       return super.increment();
+    } finally {
+      _$_UserActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void finishStart() {
+    final _$actionInfo = _$_UserActionController.startAction();
+    try {
+      return super.finishStart();
     } finally {
       _$_UserActionController.endAction(_$actionInfo);
     }
