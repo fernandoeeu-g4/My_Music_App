@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:k_central_app/pages/feed_page.dart';
-import 'package:k_central_app/pages/reviews_page.dart';
+import 'package:k_central_app/app/pages/feed_page.dart';
+import 'package:k_central_app/app/pages/reviews_page.dart';
 import 'package:k_central_app/util/constants.dart';
 
 class Router {

@@ -8,6 +8,7 @@ class UserService {
   Future<Response> getUserData(user) async {
     try {
       final String _url = '${DotEnv().env['ADONIS_URL']}/signup';
+      print(_url);
       final _data = {"email": user.email, "google_id": user.id};
       userBox.put('signinLoading', true);
       Response response = await dio.post(_url, data: _data);

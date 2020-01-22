@@ -1,10 +1,12 @@
 /// home.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:hive/hive.dart';
-import 'package:k_central_app/pages/app/app.dart';
+import 'package:k_central_app/app/app_module.dart';
+import 'package:k_central_app/app/app_widget.dart';
+import 'package:k_central_app/app/pages/app/app.dart';
 import 'package:k_central_app/models/userdata.dart';
-import 'package:k_central_app/store/feed/feed.dart';
 import 'package:k_central_app/store/signin/signin_controller.dart';
 import 'package:k_central_app/store/user/user.dart';
 import 'package:k_central_app/store/tag/tag_controller.dart';
@@ -37,9 +39,6 @@ Future main() async {
       Provider<SigninController>(
         create: (_) => SigninController()
       ),
-      Provider<Feed>(
-        create: (_) => Feed(),
-      ),
       Provider<TagController>(
         create: (_) => TagController(),
       )
@@ -58,7 +57,9 @@ Future main() async {
                 if (snapshot.hasError)
                   return Text(snapshot.error.toString());
                 else
-                  return App();
+                  return ModularApp(
+                    module: AppModule(),
+                  );
               } else {
                 return Scaffold();
               }

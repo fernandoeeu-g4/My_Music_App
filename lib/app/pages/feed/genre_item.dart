@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:k_central_app/store/feed/feed.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:k_central_app/app/pages/feed/feed_controller.dart';
+
 
 class GenreItem extends StatelessWidget {
   GenreItem({this.name, this.url, this.id});
@@ -13,7 +14,7 @@ class GenreItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final feedState = Provider.of<Feed>(context);
+    final feedController = Modular.get<FeedController>();
     return Observer(
       builder: (_) => Row(
         children: <Widget>[
@@ -22,11 +23,11 @@ class GenreItem extends StatelessWidget {
             width: id == 0 ? 15 : 5.0,
           ),
           GestureDetector(
-            onTap: () => feedState.setCurrentTag(id),
+            onTap: () => feedController.setCurrentTag(id),
             child: Container(
               height: 60.0,
               decoration: BoxDecoration(
-                color: feedState.currentTag == id ? Colors.pinkAccent : Colors.white,
+                color: feedController.currentTag == id ? Colors.pinkAccent : Colors.white,
                 borderRadius: BorderRadius.circular(50.0),
               ),
               child: Padding(
@@ -35,7 +36,7 @@ class GenreItem extends StatelessWidget {
                   child: Text(
                     name,
                     style: TextStyle(
-                        color: feedState.currentTag == id ? Colors.white : Colors.black,
+                        color: feedController.currentTag == id ? Colors.white : Colors.black,
                         fontSize: 18,
                         fontWeight: FontWeight.bold),
                   ),

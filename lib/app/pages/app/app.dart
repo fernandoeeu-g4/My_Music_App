@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:k_central_app/pages/app/widgets/app_indexed_stack.dart';
+import 'package:k_central_app/app/pages/app/widgets/app_indexed_stack.dart';
 
-import 'package:k_central_app/pages/feed_page.dart';
-import 'package:k_central_app/pages/reviews_page.dart';
-import 'package:k_central_app/pages/signin/signin_view_controller.dart';
-import 'package:k_central_app/pages/signin_page.dart';
-import 'package:k_central_app/pages/tutorial/tutorial_page.dart';
+import 'package:k_central_app/app/pages/feed_page.dart';
+import 'package:k_central_app/app/pages/reviews_page.dart';
+import 'package:k_central_app/app/pages/signin/signin_view_controller.dart';
+import 'package:k_central_app/app/pages/signin_page.dart';
+import 'package:k_central_app/app/pages/tutorial/tutorial_page.dart';
+import 'package:k_central_app/utils/app_constants.dart';
 
 class App extends StatefulWidget {
   @override
@@ -15,19 +16,19 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> with SingleTickerProviderStateMixin {
-  GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+  // GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
-  final items = [
-    BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('Feed')),
-    BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('Reviews')),
-    BottomNavigationBarItem(icon: Icon(Icons.people), title: Text('Profile')),
-  ];
+  // final items = [
+  //   BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('Feed')),
+  //   BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('Reviews')),
+  //   BottomNavigationBarItem(icon: Icon(Icons.people), title: Text('Profile')),
+  // ];
 
-  final List<Widget> bodyList = [
-    FeedPage(),
-    ReviewsPage(),
-    SigninViewController()
-  ];
+  // final List<Widget> bodyList = [
+  //   FeedPage(),
+  //   ReviewsPage(),
+  //   SigninViewController()
+  // ];
   int currentIndex = 0;
   int _pState = 0;
   Future<bool> _onWillPop() {
@@ -57,7 +58,7 @@ class _AppState extends State<App> with SingleTickerProviderStateMixin {
               'isLogged',
             ) /*&& box.get('hasCompletedTutorial', defaultValue: false)*/
                 ? BottomNavigationBar(
-                    items: items,
+                    items: AppConstants.bottomNavigationItems,
                     currentIndex: currentIndex,
                     onTap: onTap,
                   )
@@ -72,7 +73,7 @@ class _AppState extends State<App> with SingleTickerProviderStateMixin {
         // ),
         body: userBox.get('isLogged')
             ? AppIndexedStack(
-                bodyList: bodyList,
+                bodyList: AppConstants.bodyList,
                 currentIndex: currentIndex,
               )
             : TutorialPage(),

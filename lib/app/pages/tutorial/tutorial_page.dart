@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:k_central_app/pages/signin/signin_view_controller.dart';
-import 'package:k_central_app/pages/signin_page.dart';
-import 'package:k_central_app/pages/tutorial/display_name_page/display_name_page.dart';
+import 'package:k_central_app/app/pages/signin/signin_view_controller.dart';
+import 'package:k_central_app/app/pages/signin_page.dart';
+import 'package:k_central_app/app/pages/tutorial/display_name_page/display_name_page.dart';
 import 'package:k_central_app/util/my_constants.dart';
 import 'package:k_central_app/widgets/mini_banner_text.dart';
 import 'package:k_central_app/widgets/tutorial_button.dart';

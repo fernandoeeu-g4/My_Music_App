@@ -13,4 +13,10 @@ class FeedService {
       Response response = await dio.get(_url,options: Options(headers: {'authorization': "Bearer $token"} ));
       return response;
     }
+
+    Future<Response> getTopAlbumsByTag(String tag) async {
+      final String _url = '${DotEnv().env['ADONIS_URL']}/top/albums/$tag';
+      Response response = await dio.post(_url, data:{'limit': 10} ,options: Options(headers: {'authorization': "Bearer $token"} ));
+      return response;
+    }
 }
